@@ -1,0 +1,26 @@
+<div *ngIf="categories.length <= 0" class="dropdown">
+    <button class="btn btn-secondary btn-block custom-select" 
+        type="button">
+        Loading Categories...
+    </button>
+</div>
+
+<div *ngIf="categories.length > 0" class="dropdown" [class.show]="showList">
+    <button class="btn btn-secondary btn-block custom-select" 
+        type="button" id="dropdownMenuButton" 
+        data-toggle="dropdown" 
+        aria-haspopup="true" 
+        aria-expanded="showList"
+        (click)="show.emit(true)">
+        {{ getCategory() }}
+    </button>
+    <div class="dropdown-menu animated" aria-labelledby="dropdownMenuButton">
+        <ul>
+            <li *ngFor="let category of categories">
+                <a class="dropdown-item"
+                (click)="selected.emit(category)"> 
+                {{ category.category_name }} </a>
+            </li>
+        </ul>
+    </div>
+</div>

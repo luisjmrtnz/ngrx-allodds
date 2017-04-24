@@ -1,0 +1,34 @@
+.custom-select {
+    overflow: hidden;
+}
+
+.dropdown-menu {
+    width:100%;
+    text-align: center;
+    max-height:350px;
+    overflow:scroll;
+    ul {
+        list-style-type: none;
+        padding-left: 0px;
+    }
+    .dropdown-item.active, .dropdown-item:active {
+        color:#fff;
+    }
+
+    .search-box { 
+        padding: 4px 8px;
+        input {
+            text-align: center;
+        }
+    }
+
+    a {
+        cursor: pointer;
+    }
+}
+
+.dropdown {
+    .button {
+        overflow:hidden;
+    }
+}

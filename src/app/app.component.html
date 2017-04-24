@@ -1,3 +1,15 @@
-<h1>
-  {{title}}
-</h1>
+<nav class="navbar navbar-inverse bg-inverse">
+  <a class="navbar-brand" href="#"><strong>All Odds</strong></a>
+</nav>
+<div class="container">
+    <div class="row alert bg-secondary">
+        <div class="col-md-12 col-sm-12 col-lg-6">
+            <categories 
+                [categories]="categories | async"
+                [category]="category | async"
+                [showList]="showList | async"
+                (selected)="onSelected($event)"
+                (show)="onShow()"></categories>
+        </div>
+    </div>
+</div>
