@@ -1,25 +1,37 @@
-<div *ngIf="categories.length <= 0" class="dropdown">
-    <button class="btn btn-secondary btn-block custom-select" 
-        type="button">
-        Loading Categories...
-    </button>
-</div>
-
-<div *ngIf="categories.length > 0" class="dropdown" [class.show]="showList">
-    <button class="btn btn-secondary btn-block custom-select" 
+<div class="dropdown" [class.show]="showList">
+    <button class="btn btn-secondary btn-block dropdown-toggle" 
         type="button" id="dropdownMenuButton" 
+        [disabled]="loading"
         data-toggle="dropdown" 
         aria-haspopup="true" 
         aria-expanded="showList"
-        (click)="show.emit(true)">
-        {{ getCategory() }}
+        (click)="show()"
+        (keyup)="onKeyUp($event)">
+        <span *ngIf="selected?.length <= 0">{{ getButtonText() }}</span>
+        <span *ngIf="selected?.length === 1">
+            {{ selected[0].category_name }}
+        </span>
+        <span *ngIf="selected?.length > 1">
+            {{ selected.length }} selected...
+        </span>
     </button>
     <div class="dropdown-menu animated" aria-labelledby="dropdownMenuButton">
-        <ul>
-            <li *ngFor="let category of categories">
-                <a class="dropdown-item"
-                (click)="selected.emit(category)"> 
-                {{ category.category_name }} </a>
+        <div class="search-box">
+            <input type="text" class="form-control" 
+                [formControl]="term"
+                autocomplete="false" placeholder="Search here"
+                (keyup)="onKeyUp($event)">
+        </div>
+        <ul (keyup)="onKeyUp($event)">
+            <li *ngFor="let category of filterCategories">
+                <div class="form-check dropdown-item">
+                    <label class="form-check-label">
+                        <input class="form-check-input" 
+                            type="checkbox"
+                            (change)="onChecked(category)">
+                            {{ category.category_name }}
+                    </label>
+                </div>
             </li>
         </ul>
     </div>

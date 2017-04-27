@@ -13,7 +13,8 @@ import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/retryWhen';
 
 
-const API = 'http://46.166.162.185:10500/ws.asmx';
+//const API = 'http://46.166.162.185:10500/ws.asmx';
+const API = 'http://190.10.11.184:10400/soccersodds.asmx';
 
 @Injectable()
 

@@ -5,5 +5,6 @@ export interface Category {
 
 export interface CategoryState {
     list: Category[];
-    selected: Category,
+    selected: Category[],
+    loading: boolean
 }

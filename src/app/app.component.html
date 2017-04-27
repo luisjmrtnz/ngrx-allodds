@@ -6,10 +6,9 @@
         <div class="col-md-12 col-sm-12 col-lg-6">
             <categories 
                 [categories]="categories | async"
-                [category]="category | async"
-                [showList]="showList | async"
-                (selected)="onSelected($event)"
-                (show)="onShow()"></categories>
+                [loading]="loadingList | async"
+                [selected]="selectedList | async"
+                (checked)="onChecked($event)"></categories>
         </div>
     </div>
 </div>

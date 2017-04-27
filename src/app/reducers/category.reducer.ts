@@ -5,22 +5,34 @@ import { Category, CategoryState } from '../models';
 
 const initialState: CategoryState = {
     list: [],
-    selected: null
+    selected: [],
+    loading: false
 }
 
 export function categoryReducer(state = initialState, action: Action) {
     if(action && action.type){
         switch(action.type) {
+            case CategoriesActions.LOAD_CATEGORIES: 
+                return Object.assign({}, state, {
+                    loading: true
+                });
             case CategoriesActions.LOAD_CATEGORIES_SUCCESS:
-                return {
+                return Object.assign({}, state , {
                     list: [...state.list, ...action.payload],
-                    selected: state.selected
-                };
+                    loading: false
+                });
             case CategoriesActions.SELECT: 
-                return {
-                    list: state.list,
-                    selected: action.payload
+                const exists = state.selected.find(cat => cat.category_id === action.payload.category_id);
+                let filtered: Category[];
+                if(exists) {
+                    filtered = state.selected.filter(cat => cat.category_id !== action.payload.category_id);
+                } else {
+                    filtered = [...state.selected, ...action.payload];
                 }
+
+                return Object.assign({}, state, {
+                    selected: filtered
+                });
             default:
                 return state;
         }

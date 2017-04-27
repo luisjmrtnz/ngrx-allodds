@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
-import { CategoriesActions, UIActions } from './actions';
+import { CategoriesActions } from './actions';
 import { Category, CategoryState } from './models';
 
 export interface AppState {
   categories: CategoryState
-  ui: {
-    showList: boolean
-  }
 }
 
 @Component({
@@ -17,28 +15,23 @@ export interface AppState {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  categories;
-  category;
-  showList;
+  categories: Observable<Category[]>;
+  loadingList: Observable<boolean>;
+  selectedList: Observable<Category[]>;
 
   constructor(
     private store: Store<AppState>,
-    private categoryActions: CategoriesActions,
-    private ui: UIActions){}
+    private categoryActions: CategoriesActions){}
 
   ngOnInit() {
     this.store.dispatch(this.categoryActions.loadCategories());
     this.categories = this.store.select(state => state.categories.list);
-    this.category = this.store.select(state => state.categories.selected);
-    this.showList = this.store.select(state => state.ui.showList);
+    this.loadingList = this.store.select(state => state.categories.loading);
+    this.selectedList = this.store.select(state => state.categories.selected);
   }
 
-  onSelected(x: Category) {
-    this.store.dispatch(this.categoryActions.select(x));
-    this.store.dispatch(this.ui.closeList());
-  } 
-
-  onShow() {
-    this.store.dispatch(this.ui.showList());
+  onChecked(category: Category) {
+    this.store.dispatch(this.categoryActions.select(category));
   }
+
 }

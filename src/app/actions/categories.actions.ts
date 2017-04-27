@@ -21,6 +21,14 @@ export class CategoriesActions {
         }
     }
 
+    static LOAD_CATEGORIES_FAILURE = 'LOAD_CATEGORIES_FAILURE';
+    loadCategoriesFailure(err: any): Action {
+        return {
+            type: CategoriesActions.LOAD_CATEGORIES_FAILURE,
+            payload: err
+        }
+    }
+
     static SELECT = 'SELECT';
     select(category: Category) : Action {
         return {
