@@ -13,21 +13,31 @@
         </span>
         <span *ngIf="selected?.length > 1">
             {{ selected.length }} selected...
-        </span>
+        </span> 
+        <button type="button" 
+            class="close" 
+            aria-label="Close"
+            *ngIf="selected?.length >= 1"
+            (click)="onClear($event)">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </button>
     <div class="dropdown-menu animated" aria-labelledby="dropdownMenuButton">
         <div class="search-box">
-            <input type="text" class="form-control" 
+            <input type="text" class="form-control"
+                #termInput
                 [formControl]="term"
                 autocomplete="false" placeholder="Search here"
                 (keyup)="onKeyUp($event)">
         </div>
-        <ul (keyup)="onKeyUp($event)">
+        <ul>
             <li *ngFor="let category of filterCategories">
                 <div class="form-check dropdown-item">
                     <label class="form-check-label">
-                        <input class="form-check-input" 
+                        <input 
+                            class="form-check-input" 
                             type="checkbox"
+                            [checked]="category.selected"
                             (change)="onChecked(category)">
                             {{ category.category_name }}
                     </label>

@@ -17,7 +17,6 @@ export interface AppState {
 export class AppComponent implements OnInit{
   categories: Observable<Category[]>;
   loadingList: Observable<boolean>;
-  selectedList: Observable<Category[]>;
 
   constructor(
     private store: Store<AppState>,
@@ -27,11 +26,14 @@ export class AppComponent implements OnInit{
     this.store.dispatch(this.categoryActions.loadCategories());
     this.categories = this.store.select(state => state.categories.list);
     this.loadingList = this.store.select(state => state.categories.loading);
-    this.selectedList = this.store.select(state => state.categories.selected);
   }
 
   onChecked(category: Category) {
     this.store.dispatch(this.categoryActions.select(category));
+  }
+
+  onClear() {
+    this.store.dispatch(this.categoryActions.clearSelect());
   }
 
 }

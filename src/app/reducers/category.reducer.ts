@@ -5,7 +5,6 @@ import { Category, CategoryState } from '../models';
 
 const initialState: CategoryState = {
     list: [],
-    selected: [],
     loading: false
 }
 
@@ -22,16 +21,14 @@ export function categoryReducer(state = initialState, action: Action) {
                     loading: false
                 });
             case CategoriesActions.SELECT: 
-                const exists = state.selected.find(cat => cat.category_id === action.payload.category_id);
-                let filtered: Category[];
-                if(exists) {
-                    filtered = state.selected.filter(cat => cat.category_id !== action.payload.category_id);
-                } else {
-                    filtered = [...state.selected, ...action.payload];
-                }
-
+                const id = action.payload.category_id;
+                const selected = state.list.map(cat => (cat.category_id === id)? Object.assign({}, cat, { selected: !cat.selected }) : cat );
                 return Object.assign({}, state, {
-                    selected: filtered
+                   list: selected
+                });
+            case CategoriesActions.CLEAR_SELECT:
+                return Object.assign({}, state, {
+                    list: state.list.map(x => Object.assign({}, x, { selected: false }))
                 });
             default:
                 return state;

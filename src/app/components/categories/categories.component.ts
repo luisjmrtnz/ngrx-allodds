@@ -1,4 +1,13 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { 
+  Component, 
+  OnInit, 
+  Input, 
+  Output, 
+  EventEmitter,
+  ElementRef,
+  ViewChild,
+  Renderer
+} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -12,14 +21,25 @@ import { Category } from '../../models';
 })
 export class CategoriesComponent implements OnInit {
   @Input() loading: boolean;
-  @Input() categories: Category[];
   @Input() showList: boolean;
-  @Input() selected: Category[];
   @Output() checked = new EventEmitter<Category>();
+  @Output() clear = new EventEmitter<any>();
+  @ViewChild('termInput') termElement: ElementRef;
   term = new FormControl();
   filterCategories: Category[];
+  _categories: Category[];
 
-  constructor() { }
+  @Input('categories') 
+  set categories(value: Category[]) {
+    this._categories = value;
+    this.initFilter();
+  }
+
+  get categories() {
+    return this._categories;
+  }
+
+  constructor(private renderer: Renderer) { }
 
   ngOnInit() {
     this.term.valueChanges
@@ -34,9 +54,6 @@ export class CategoriesComponent implements OnInit {
 
   show() {
     this.showList = !this.showList;
-    if(!this.filterCategories){
-      this.initFilter();
-    }
   }
 
   getButtonText() {
@@ -44,7 +61,7 @@ export class CategoriesComponent implements OnInit {
   }
 
   onKeyUp($event) {
-    if($event.key === 'Escape'){
+    if($event.keyCode === 27){
       this.showList = false;
     }
   }
@@ -66,6 +83,16 @@ export class CategoriesComponent implements OnInit {
 
   onChecked(category: Category) {
     this.checked.emit(category);
+    this.renderer.invokeElementMethod(this.termElement.nativeElement, 'focus');
+  }
+
+  get selected() {
+    return this.categories.filter(cat => cat.selected === true);
+  }
+
+  onClear($event){ 
+    $event.stopPropagation();
+    this.clear.emit(null) 
   }
 
 }

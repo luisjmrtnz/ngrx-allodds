@@ -12,6 +12,8 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/retryWhen';
 
+import { Category } from '../models/';
+
 
 //const API = 'http://46.166.162.185:10500/ws.asmx';
 const API = 'http://190.10.11.184:10400/soccersodds.asmx';
@@ -27,6 +29,8 @@ export class OddService {
             .get(`${API}/getCategories`)
             .take(1)
             .map((response: Response) => this.getCategoriesFromXML(response))
+            /* Adding selected property for the checkboxes */
+            .map((categories: Category[]) => categories.map(cat => Object.assign({}, cat, { selected: false })))
             .retryWhen((errors) => errors.delay(8000))
             .catch((error: any) => Observable.throw(error.json()));
     }

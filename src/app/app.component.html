@@ -7,8 +7,8 @@
             <categories 
                 [categories]="categories | async"
                 [loading]="loadingList | async"
-                [selected]="selectedList | async"
-                (checked)="onChecked($event)"></categories>
+                (checked)="onChecked($event)"
+                (clear)="onClear()"></categories>
         </div>
     </div>
 </div>

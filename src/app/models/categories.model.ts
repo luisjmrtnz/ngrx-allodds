@@ -1,10 +1,10 @@
 export interface Category {
-    category_id: number,
-    category_name: string
+    category_id: number;
+    category_name: string;
+    selected: boolean;
 }
 
 export interface CategoryState {
     list: Category[];
-    selected: Category[],
-    loading: boolean
+    loading: boolean;
 }

@@ -30,10 +30,17 @@ export class CategoriesActions {
     }
 
     static SELECT = 'SELECT';
-    select(category: Category) : Action {
+    select(category: Category): Action {
         return {
             type: CategoriesActions.SELECT,
             payload: category
+        }
+    }
+
+    static CLEAR_SELECT = 'CLEAR_SELECT';
+    clearSelect(): Action {
+        return {
+            type: CategoriesActions.CLEAR_SELECT
         }
     }
 }
