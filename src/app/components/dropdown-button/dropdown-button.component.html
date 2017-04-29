@@ -1,0 +1,22 @@
+<button class="btn btn-secondary btn-block dropdown-toggle" 
+    type="button" id="dropdownMenuButton" 
+    [disabled]="loading"
+    data-toggle="dropdown" 
+    aria-haspopup="true" 
+    (click)="clicked.emit(null)"
+    (keyup)="close.emit($event)">
+    <span *ngIf="(categories | selected)?.length <= 0">{{ getButtonText() }}</span>
+    <span *ngIf="(categories | selected)?.length === 1">
+        {{ (categories | selected)[0].category_name | shortText }}
+    </span>
+    <span *ngIf="( categories | selected )?.length > 1">
+        {{ (categories | selected).length }} selected...
+    </span> 
+    <button type="button" 
+        *ngIf="(categories | selected)?.length >= 1"
+        class="close" 
+        aria-label="Close"
+        (click)="clear.emit($event)">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</button>

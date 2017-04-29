@@ -16,10 +16,17 @@ import { CategoryEffects } from './effects';
 import { OddService } from './providers';
 import * as actions from './actions';
 
+/* Pipes */
+import * as pipes from './pipes';
+
 @NgModule({
   declarations: [
     AppComponent,
-    components.CategoriesComponent
+    components.CategoriesComponent,
+    components.DropdownButtonComponent,
+    pipes.SearchFilterPipe,
+    pipes.CategorySelectedPipe,
+    pipes.ShortTextPipe
   ],
   imports: [
     BrowserModule,

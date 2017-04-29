@@ -1,37 +1,22 @@
 <div class="dropdown" [class.show]="showList">
-    <button class="btn btn-secondary btn-block dropdown-toggle" 
-        type="button" id="dropdownMenuButton" 
-        [disabled]="loading"
-        data-toggle="dropdown" 
-        aria-haspopup="true" 
-        aria-expanded="showList"
-        (click)="show()"
-        (keyup)="onKeyUp($event)">
-        <span *ngIf="selected?.length <= 0">{{ getButtonText() }}</span>
-        <span *ngIf="selected?.length === 1">
-            {{ selected[0].category_name }}
-        </span>
-        <span *ngIf="selected?.length > 1">
-            {{ selected.length }} selected...
-        </span> 
-        <button type="button" 
-            class="close" 
-            aria-label="Close"
-            *ngIf="selected?.length >= 1"
-            (click)="onClear($event)">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </button>
+    <dropdown-button 
+        [loading]="loading"
+        [categories]="categories"
+        (clicked)="show()"
+        (clear)="onClear($event)"
+        (close)="onKeyUp($event)">
+    </dropdown-button>
     <div class="dropdown-menu animated" aria-labelledby="dropdownMenuButton">
         <div class="search-box">
-            <input type="text" class="form-control"
-                #termInput
-                [formControl]="term"
-                autocomplete="false" placeholder="Search here"
+            <input type="text" 
+                class="form-control"
+                #search
+                autocomplete="false" 
+                placeholder="Search here"
                 (keyup)="onKeyUp($event)">
         </div>
         <ul>
-            <li *ngFor="let category of filterCategories">
+            <li *ngFor="let category of (categories | searchFilter: search.value)">
                 <div class="form-check dropdown-item">
                     <label class="form-check-label">
                         <input 

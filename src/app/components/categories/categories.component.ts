@@ -22,42 +22,18 @@ import { Category } from '../../models';
 export class CategoriesComponent implements OnInit {
   @Input() loading: boolean;
   @Input() showList: boolean;
+  @Input() categories: Category[];
   @Output() checked = new EventEmitter<Category>();
   @Output() clear = new EventEmitter<any>();
-  @ViewChild('termInput') termElement: ElementRef;
-  term = new FormControl();
-  filterCategories: Category[];
-  _categories: Category[];
-
-  @Input('categories') 
-  set categories(value: Category[]) {
-    this._categories = value;
-    this.initFilter();
-  }
-
-  get categories() {
-    return this._categories;
-  }
+  @ViewChild('search') search: ElementRef;
 
   constructor(private renderer: Renderer) { }
 
   ngOnInit() {
-    this.term.valueChanges
-      .debounceTime(200)
-      .distinctUntilChanged()
-      .subscribe(term => this.onSearch(term));
-  }
-
-  initFilter() {
-    this.filterCategories = this.categories;
   }
 
   show() {
     this.showList = !this.showList;
-  }
-
-  getButtonText() {
-    return (this.loading) ? 'Loading Categories...': 'Select a Category';
   }
 
   onKeyUp($event) {
@@ -66,33 +42,16 @@ export class CategoriesComponent implements OnInit {
     }
   }
 
-  onSearch(query: string) {
-    this.initFilter();
-
-    if(!query || query.trim() === '') {
-          return;
-    }
-
-    this.filterCategories = this.filterCategories.filter((cat: Category) => {
-        if(cat.category_name.toLowerCase().indexOf(query.toLowerCase()) > -1) {
-            return true;
-        }
-        return false;
-      });
-  }
-
   onChecked(category: Category) {
     this.checked.emit(category);
-    this.renderer.invokeElementMethod(this.termElement.nativeElement, 'focus');
+    this.renderer.invokeElementMethod(this.search.nativeElement, 'focus');
   }
-
-  get selected() {
-    return this.categories.filter(cat => cat.selected === true);
-  }
-
+  
   onClear($event){ 
     $event.stopPropagation();
-    this.clear.emit(null) 
+    this.clear.emit(null);
+    this.renderer.setElementProperty(this.search.nativeElement, 'value', '');
+    this.renderer.invokeElementMethod(this.search.nativeElement, 'focus');
   }
 
 }
