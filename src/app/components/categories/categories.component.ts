@@ -8,7 +8,6 @@ import {
   ViewChild,
   Renderer
 } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 

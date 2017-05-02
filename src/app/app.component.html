@@ -6,9 +6,16 @@
         <div class="col-md-12 col-sm-12 col-lg-6">
             <categories 
                 [categories]="categories | async"
-                [loading]="loadingList | async"
+                [loading]="loadingCategories | async"
                 (checked)="onChecked($event)"
                 (clear)="onClear()"></categories>
         </div>
+       <div class="col-md-12 col-sm-12 col-lg-6">
+            <my-date-picker name="mydate" 
+                [options]="myDatePickerOptions"
+                [(ngModel)]="model"
+                (dateChanged)="onDateChanged($event)"
+                [disabled]="loadingCategories | async"></my-date-picker>
+       </div>
     </div>
 </div>

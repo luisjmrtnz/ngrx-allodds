@@ -1,10 +1,10 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
-
+import { MyDatePickerModule } from 'mydatepicker';
 import { AppComponent } from './app.component';
 import * as components from './components';
 
@@ -30,12 +30,13 @@ import * as pipes from './pipes';
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
+    FormsModule,
     HttpModule,
     EffectsModule.runAfterBootstrap(CategoryEffects),
     StoreModule.provideStore({
       categories: reducers.categoryReducer
-    })
+    }),
+    MyDatePickerModule
   ],
   providers: [
     OddService,
