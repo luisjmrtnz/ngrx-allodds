@@ -12,9 +12,14 @@ const initialState: MatchState = {
 export function matchesReducer(state = initialState, action: Action) {
     if(action && action.type) {
         switch(action.type) {
+            case MatchesActions.GET_MATCHES: 
+                return Object.assign({}, state, {
+                    loading: true
+                });
             case MatchesActions.GET_MATCHES_SUCCESS:
                 return Object.assign({}, state, {
-                    matches: action.payload
+                    matches: action.payload,
+                    loading: false
                 });
             case MatchesActions.SET_DATE:
                const date = (action.payload !== '')? action.payload: null;
@@ -27,3 +32,4 @@ export function matchesReducer(state = initialState, action: Action) {
     }
 } 
 
+export const getMatches = (state: MatchState) => state.matches.map((match: Match) => match.category_name);

@@ -1,4 +1,9 @@
-import { categoryReducer } from './category.reducer';
-import { matchesReducer } from './matches.reducer';
+import { categoryReducer, selectedCategories } from './category.reducer';
+import { matchesReducer, getMatches } from './matches.reducer';
 
-export { categoryReducer, matchesReducer };
+export { 
+    categoryReducer, 
+    matchesReducer, 
+    selectedCategories,
+    getMatches
+};

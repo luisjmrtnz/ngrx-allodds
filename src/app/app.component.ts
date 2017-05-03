@@ -5,6 +5,7 @@ import { IMyOptions } from 'mydatepicker';
 
 import { CategoriesActions, MatchesActions } from './actions';
 import { Category, CategoryState, MatchState, Match } from './models';
+import { selectedCategories, getMatches } from './reducers';
 
 export interface AppState {
   categories: CategoryState,
@@ -19,13 +20,15 @@ export interface AppState {
 export class AppComponent implements OnInit{
   categories: Observable<Category[]>;
   loadingCategories: Observable<boolean>;
+  loadingMatches: Observable<boolean>;
   myDatePickerOptions: IMyOptions = {
-    dateFormat: 'dd/mm/yyyy',
+    dateFormat: 'yyyy-mm-dd',
     height: '2.29rem'
   };
   model: any;
-  matches: Observable<Match[]>;
+  matches: Observable<string[]>;
   date: Observable<string>;
+  selectedCategories: Observable<Category[]>;
 
   constructor(
     private store: Store<AppState>,
@@ -37,9 +40,11 @@ export class AppComponent implements OnInit{
     this.store.dispatch(this.categoryActions.loadCategories());
     this.categories = this.store.select(state => state.categories.list);
     this.loadingCategories = this.store.select(state => state.categories.loading);
-    this.matches = this.store.select(state => state.matches.matches);
+    this.matches = this.store.select(state => getMatches(state.matches));
     this.date = this.store.select(state => state.matches.date);
-  }
+    this.selectedCategories = this.store.select(state => selectedCategories(state.categories));
+    this.loadingMatches = this.store.select(state => state.matches.loading);
+}
 
   onChecked(category: Category) {
     this.store.dispatch(this.categoryActions.select(category));
@@ -49,8 +54,7 @@ export class AppComponent implements OnInit{
     this.store.dispatch(this.categoryActions.clearSelect());
   }
 
-  onDateChanged($event) {
-    let date = $event.value;
+  onDateChanged(date: string) {
     this.store.dispatch(this.matchActions.setDate(date));
   }
 
@@ -64,6 +68,12 @@ export class AppComponent implements OnInit{
             day: date.getDate() 
           }
         };
-    }
+  }
+  searchMatches(matchRequest) {
+    if(matchRequest)
+      this.store.dispatch(this.matchActions.getMatches(matchRequest));
+  }
+
+
 
 }

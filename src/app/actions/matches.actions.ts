@@ -13,7 +13,7 @@ export class MatchesActions {
             payload: matchRequests
         }
     }
-
+    
     static GET_MATCHES_SUCCESS = 'GET_MATCHES_SUCCESS';
     getMatchesSuccess(matches: Match[]): Action {
         return {

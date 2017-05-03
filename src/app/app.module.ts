@@ -24,6 +24,7 @@ import * as pipes from './pipes';
     AppComponent,
     components.CategoriesComponent,
     components.DropdownButtonComponent,
+    components.MatchButtonComponent,
     pipes.SearchFilterPipe,
     pipes.CategorySelectedPipe,
     pipes.ShortTextPipe

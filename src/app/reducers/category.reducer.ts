@@ -35,3 +35,5 @@ export function categoryReducer(state = initialState, action: Action) {
         }
     }
 };
+
+export const selectedCategories = (state: CategoryState) => state.list.filter(cat => cat.selected);
