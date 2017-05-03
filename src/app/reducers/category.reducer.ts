@@ -1,4 +1,4 @@
-import { Action  } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 
 import { CategoriesActions } from '../actions';
 import { Category, CategoryState } from '../models';

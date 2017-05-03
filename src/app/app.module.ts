@@ -10,7 +10,7 @@ import * as components from './components';
 
 /* Reducers */
 import * as reducers from './reducers';
-import { CategoryEffects } from './effects';
+import * as effects from './effects';
 
 /* Services */
 import { OddService } from './providers';
@@ -32,15 +32,18 @@ import * as pipes from './pipes';
     BrowserModule,
     FormsModule,
     HttpModule,
-    EffectsModule.runAfterBootstrap(CategoryEffects),
-    StoreModule.provideStore({
-      categories: reducers.categoryReducer
+    StoreModule.provideStore({ 
+      categories: reducers.categoryReducer, 
+      matches: reducers.matchesReducer 
     }),
+    EffectsModule.runAfterBootstrap(effects.CategoryEffects),
+    EffectsModule.runAfterBootstrap(effects.MatchEffects),
     MyDatePickerModule
   ],
   providers: [
     OddService,
-    actions.CategoriesActions
+    actions.CategoriesActions,
+    actions.MatchesActions
   ],
   bootstrap: [AppComponent]
 })

@@ -1,3 +1,4 @@
 import { CategoryEffects } from './category.effects';
+import { MatchEffects } from './match.effects';
 
-export { CategoryEffects };
+export { CategoryEffects, MatchEffects };

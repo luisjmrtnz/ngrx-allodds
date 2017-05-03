@@ -14,8 +14,11 @@
             <my-date-picker name="mydate" 
                 [options]="myDatePickerOptions"
                 [(ngModel)]="model"
-                (dateChanged)="onDateChanged($event)"
+                (inputFieldChanged)="onDateChanged($event)"
                 [disabled]="loadingCategories | async"></my-date-picker>
        </div>
     </div>
 </div>
+{{ matches | async | json }}
+{{ date | async | json }}
+
