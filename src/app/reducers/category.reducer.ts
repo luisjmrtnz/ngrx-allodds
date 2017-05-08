@@ -5,7 +5,8 @@ import { Category, CategoryState } from '../models';
 
 const initialState: CategoryState = {
     list: [],
-    loading: false
+    loading: false,
+    show: false
 }
 
 export function categoryReducer(state = initialState, action: Action) {
@@ -29,6 +30,11 @@ export function categoryReducer(state = initialState, action: Action) {
             case CategoriesActions.CLEAR_SELECT:
                 return Object.assign({}, state, {
                     list: state.list.map(x => Object.assign({}, x, { selected: false }))
+                });
+            case CategoriesActions.TOGGLE_DROPDOWN:
+                const toggle: boolean = action.payload;
+                return Object.assign({}, state, {
+                    show: (toggle)? toggle: !state.show
                 });
             default:
                 return state;

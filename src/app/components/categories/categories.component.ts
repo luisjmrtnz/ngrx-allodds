@@ -8,8 +8,6 @@ import {
   ViewChild,
   Renderer
 } from '@angular/core';
-import 'rxjs/add/operator/debounceTime';
-import 'rxjs/add/operator/distinctUntilChanged';
 
 import { Category } from '../../models';
 
@@ -24,6 +22,7 @@ export class CategoriesComponent implements OnInit {
   @Input() categories: Category[];
   @Output() checked = new EventEmitter<Category>();
   @Output() clear = new EventEmitter<any>();
+  @Output() toggle = new EventEmitter<boolean>();
   @ViewChild('search') search: ElementRef;
 
   constructor(private renderer: Renderer) { }
@@ -32,12 +31,12 @@ export class CategoriesComponent implements OnInit {
   }
 
   show() {
-    this.showList = !this.showList;
+    this.toggle.emit(null);
   }
 
   onKeyUp($event) {
     if($event.keyCode === 27){
-      this.showList = false;
+      this.toggle.emit(false);
     }
   }
 

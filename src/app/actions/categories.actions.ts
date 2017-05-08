@@ -43,4 +43,11 @@ export class CategoriesActions {
             type: CategoriesActions.CLEAR_SELECT
         }
     }
+    static TOGGLE_DROPDOWN = 'TOGGLE_DROPDOWN';
+    toggleDropdown(toggle: boolean): Action {
+        return {
+            type: CategoriesActions.TOGGLE_DROPDOWN,
+            payload: toggle
+        }
+    }
 }

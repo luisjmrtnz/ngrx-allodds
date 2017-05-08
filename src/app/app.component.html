@@ -7,7 +7,9 @@
             <categories 
                 [categories]="categories | async"
                 [loading]="loadingCategories | async"
+                [showList]="toggle | async"
                 (checked)="onChecked($event)"
+                (toggle)="onToggle($event)"
                 (clear)="onClear()"></categories>
         </div>
        <div class="col-md-12 col-sm-12 col-lg-3">

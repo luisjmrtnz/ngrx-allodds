@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { IMyOptions } from 'mydatepicker';
 
 import { CategoriesActions, MatchesActions } from './actions';
-import { Category, CategoryState, MatchState, Match } from './models';
+import { Category, CategoryState, MatchState, Match, MatchRequest } from './models';
 import { selectedCategories, getMatches } from './reducers';
 
 export interface AppState {
@@ -29,6 +29,7 @@ export class AppComponent implements OnInit{
   matches: Observable<string[]>;
   date: Observable<string>;
   selectedCategories: Observable<Category[]>;
+  toggle: Observable<boolean>;
 
   constructor(
     private store: Store<AppState>,
@@ -44,6 +45,7 @@ export class AppComponent implements OnInit{
     this.date = this.store.select(state => state.matches.date);
     this.selectedCategories = this.store.select(state => selectedCategories(state.categories));
     this.loadingMatches = this.store.select(state => state.matches.loading);
+    this.toggle = this.store.select(state => state.categories.show);
 }
 
   onChecked(category: Category) {
@@ -69,11 +71,17 @@ export class AppComponent implements OnInit{
           }
         };
   }
-  searchMatches(matchRequest) {
-    if(matchRequest)
-      this.store.dispatch(this.matchActions.getMatches(matchRequest));
+
+  searchMatches(matchRequests: MatchRequest[]) {
+    if(matchRequests) {
+      this.store.dispatch(this.matchActions.getMatches(matchRequests));
+      this.store.dispatch(this.categoryActions.toggleDropdown(false));
+    }
   }
 
-
+  onToggle(toggle: boolean) {
+    const t = toggle || null;
+    this.store.dispatch(this.categoryActions.toggleDropdown(t));
+  }
 
 }

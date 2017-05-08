@@ -18,7 +18,7 @@ export function matchesReducer(state = initialState, action: Action) {
                 });
             case MatchesActions.GET_MATCHES_SUCCESS:
                 return Object.assign({}, state, {
-                    matches: action.payload,
+                    matches: [].concat(...action.payload),
                     loading: false
                 });
             case MatchesActions.SET_DATE:

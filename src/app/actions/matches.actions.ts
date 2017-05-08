@@ -7,7 +7,7 @@ import { MatchRequest, Match } from '../models';
 
 export class MatchesActions {
     static GET_MATCHES = 'GET_MATCHES';
-    getMatches(matchRequests: MatchRequest): Action {
+    getMatches(matchRequests: MatchRequest[]): Action {
         return {
             type: MatchesActions.GET_MATCHES,
             payload: matchRequests

@@ -4,15 +4,15 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/take';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/takeUntil';
 import 'rxjs/add/operator/switchMap';
-import 'rxjs/add/operator/share';
 import 'rxjs/add/operator/publishReplay';
 import 'rxjs/add/observable/timer';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/retryWhen';
 
-import { Category } from '../models/';
+import { Category, MatchRequest } from '../models/';
 
 
 const API = 'http://46.166.162.185:10500/ws.asmx';
@@ -27,7 +27,6 @@ export class OddService {
     getCategories() {
         return this.http
             .get(`${API}/getCategories`)
-            .take(1)
             .map((response: Response) => this.getCategoriesFromXML(response))
             /* Adding selected property for the checkboxes */
             .map((categories: Category[]) => categories.map(cat => Object.assign({}, cat, { selected: false })))
@@ -55,12 +54,21 @@ export class OddService {
             .catch((error: any) => Observable.throw(error.json()));
     }
 
-    getMatchStream(requestMatch) {
+  /*  getMatchStream(requestMatch) {
          return Observable.timer(0,15000)
             .switchMap(() => this.getMatches(requestMatch))
             .share()
             .publishReplay(1)        
             .refCount();
+    }*/
+
+    getMatchArray(requests: MatchRequest[], $stop: Observable<any>) {
+            const req = requests.map(req => this.getMatches(req));
+            const ob = Observable.forkJoin(req);
+
+            return Observable.timer(0, 15000)
+                .takeUntil($stop)
+                .switchMap(() => ob);
     }
 
     getCategoriesFromXML(response: Response) {

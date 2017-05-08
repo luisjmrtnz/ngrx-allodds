@@ -7,4 +7,5 @@ export interface Category {
 export interface CategoryState {
     list: Category[];
     loading: boolean;
+    show: boolean;
 }
