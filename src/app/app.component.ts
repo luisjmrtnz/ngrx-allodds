@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { IMyOptions } from 'mydatepicker';
+import { IMyOptions, MyDatePicker } from 'mydatepicker';
 
 import { CategoriesActions, MatchesActions } from './actions';
 import { Category, CategoryState, MatchState, Match, MatchRequest } from './models';
@@ -26,10 +26,11 @@ export class AppComponent implements OnInit{
     height: '2.29rem'
   };
   model: any;
-  matches: Observable<string[]>;
+  matches: Observable<Match[]>;
   date: Observable<string>;
   selectedCategories: Observable<Category[]>;
   toggle: Observable<boolean>;
+  @ViewChild('datepicker') datepicker: MyDatePicker;
 
   constructor(
     private store: Store<AppState>,
@@ -75,13 +76,16 @@ export class AppComponent implements OnInit{
   searchMatches(matchRequests: MatchRequest[]) {
     if(matchRequests) {
       this.store.dispatch(this.matchActions.getMatches(matchRequests));
-      this.store.dispatch(this.categoryActions.toggleDropdown(false));
+      this.onToggle(false);
     }
   }
 
   onToggle(toggle: boolean) {
-    const t = toggle || null;
+    const t = (toggle !== null)? toggle: null;
     this.store.dispatch(this.categoryActions.toggleDropdown(t));
   }
 
+  onClick(){
+    this.onToggle(false);
+  }
 }

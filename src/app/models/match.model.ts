@@ -12,6 +12,7 @@ export interface Match {
 }
 
 export interface ThreewayOdd {
+    match_id: number
     bookmaker_name: string,
     odds: Odd[]
 }
@@ -24,6 +25,7 @@ export interface Odd {
 
 export interface MatchState {
     matches: Match[],
+    threeway: ThreewayOdd[],
     date: string,
     loading: boolean,
 }

@@ -34,7 +34,7 @@ export function categoryReducer(state = initialState, action: Action) {
             case CategoriesActions.TOGGLE_DROPDOWN:
                 const toggle: boolean = action.payload;
                 return Object.assign({}, state, {
-                    show: (toggle)? toggle: !state.show
+                    show: (toggle !== null)? toggle: !state.show
                 });
             default:
                 return state;

@@ -14,10 +14,12 @@
         </div>
        <div class="col-md-12 col-sm-12 col-lg-3">
             <my-date-picker name="mydate" 
+                #datepicker
                 [options]="myDatePickerOptions"
                 [(ngModel)]="model"
                 (inputFieldChanged)="onDateChanged($event.value)"
-                [disabled]="loadingCategories | async"></my-date-picker>
+                [disabled]="loadingCategories | async"
+                (click)="onClick()"></my-date-picker>
        </div>
        <div class="col-md-12 col-sm-12 col-lg-2">
             <match-button 
@@ -30,9 +32,8 @@
 <div *ngIf="loadingMatches | async">
     Loading Matches...
 </div>
-<ul class="list-group">
-  <li class="list-group-item" *ngFor="let match of (matches | async)">
-      {{ match }}
-  </li>
-</ul>
+<div class="container-fluid">
+    <match-table [matches]="matches | async"></match-table>
+</div>
+
 

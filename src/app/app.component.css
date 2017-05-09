@@ -1,3 +1,7 @@
 /deep/ .mydp input.selection{
     font-size:1rem!important;
 }
+
+.alert {
+    margin-bottom: 0;
+}
