@@ -2,3 +2,11 @@
 .btn {
     cursor: pointer;
 }
+
+.table-sm th, .table-sm td {
+    font-size: 0.7em;
+    padding:0;
+    text-align: center;
+}
+
+table.table-sm { margin-bottom: 0;}

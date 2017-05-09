@@ -1,4 +1,30 @@
-<ul *ngIf="bookmakers">
-    <li *ngFor="let bookmaker of bookmakers">
-        {{ bookmaker.bookmaker_name }}</li>
-</ul>
+<div class="container-fluid" *ngIf="bookmakers">
+    <div class="row scrollable-section">
+        <table *ngFor="let bookmaker of bookmakers"
+            class="table table-bordered table-sm">
+            <thead>
+                <tr>
+                    <th>{{ bookmaker.bookmaker_name }}</th>
+                </tr>
+            </thead>
+            <tbody>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Value</th>
+                            <th>Handicap</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let odd of bookmaker.odds">
+                            <td>{{ odd.odd_name }}</td>
+                            <td>{{ odd.odd_value }}</td>
+                            <td> N/A </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </tbody>
+        </table>
+    </div>
+</div>

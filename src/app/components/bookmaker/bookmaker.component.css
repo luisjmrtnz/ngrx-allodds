@@ -1,0 +1,14 @@
+.scrollable-section{
+    overflow-x: scroll;
+    flex-wrap: nowrap;
+    width: 98vw;
+}
+
+.scrollable-section table{
+    display: inline-block;
+    width: auto;
+}
+
+.scrollable-section .table-sm th {
+    padding:0px 1em;
+}
