@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import { IMyOptions, MyDatePicker } from 'mydatepicker';
 
 import { CategoriesActions, MatchesActions } from './actions';
-import { Category, CategoryState, MatchState, Match, MatchRequest } from './models';
+import { Category, CategoryState, MatchState, Match, MatchRequest, ThreewayOdd } from './models';
 import { selectedCategories, getMatches } from './reducers';
 
 export interface AppState {
@@ -30,7 +30,6 @@ export class AppComponent implements OnInit{
   date: Observable<string>;
   selectedCategories: Observable<Category[]>;
   toggle: Observable<boolean>;
-  @ViewChild('datepicker') datepicker: MyDatePicker;
 
   constructor(
     private store: Store<AppState>,

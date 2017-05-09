@@ -6,8 +6,7 @@ import { Match, MatchState, ThreewayOdd} from '../models';
 const initialState: MatchState = {
     matches: [],
     date: null,
-    loading: false,
-    threeway: []
+    loading: false
 }
 
 export function matchesReducer(state = initialState, action: Action) {
@@ -18,18 +17,9 @@ export function matchesReducer(state = initialState, action: Action) {
                     loading: true
                 });
             case MatchesActions.GET_MATCHES_SUCCESS:
-                const m = [].concat(...action.payload);
-                const threeway = m.map((m: Match) =>  {
-                   return m.odds_threeway.map((t: ThreewayOdd) => { 
-                            return Object.assign({}, t, { 
-                                match_id: m.match_id 
-                            });
-                        });
-                });
                 return Object.assign({}, state, {
-                    matches: m,
+                    matches: [].concat(...action.payload),
                     loading: false,
-                    threeway: [].concat(...threeway)
                 });
             case MatchesActions.SET_DATE:
                const date = (action.payload !== '')? action.payload: null;

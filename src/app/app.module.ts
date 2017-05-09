@@ -26,9 +26,11 @@ import * as pipes from './pipes';
     components.DropdownButtonComponent,
     components.MatchButtonComponent,
     components.MatchTableComponent,
+    components.BookmakerComponent,
     pipes.SearchFilterPipe,
     pipes.CategorySelectedPipe,
-    pipes.ShortTextPipe
+    pipes.ShortTextPipe,
+    pipes.BookmakerPipe
   ],
   imports: [
     BrowserModule,

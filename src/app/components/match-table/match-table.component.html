@@ -1,28 +1,31 @@
-<table class="table table-bordered table-sm" *ngFor="let match of matches">
-  <thead>
-    <tr class="table-active">
-      <th>Info</th>
-      <th>Status</th>
-      <th>Date/Time</th>
-      <th>Stadium</th>
-      <th>Category</th>
-      <th>Local</th>
-      <th>Goals</th>
-      <th>Visitors</th>
-      <th>Goals</th>
-    </tr>
-</thead>
-<tbody>
-  <tr>
-    <td>{{ match?.match_id }}</td>
-    <td>{{ match.status }}</td>
-    <td>{{ match.date_time }}</td>
-    <td>{{ match.stadium }}</td>
-    <td>{{ match.category_name }}</td>
-    <td>{{ match.localteam_name }}</td>
-    <td>{{ match.localteam_goals }}</td>
-    <td>{{ match.visitorteam_name}}</td>
-    <td>{{ match.visitorteam_goals}}</td>
-  </tr>
-</tbody>
-</table>
+<div class="row" *ngFor="let match of matches">
+  <table class="table table-bordered table-sm">
+    <thead>
+      <tr class="table-active">
+        <th>Info</th>
+        <th>Status</th>
+        <th>Date/Time</th>
+        <th>Stadium</th>
+        <th>Category</th>
+        <th>Local</th>
+        <th>Goals</th>
+        <th>Visitors</th>
+        <th>Goals</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{ match?.match_id }}</td>
+        <td>{{ match.status }}</td>
+        <td>{{ match.date_time }}</td>
+        <td>{{ match.stadium }}</td>
+        <td>{{ match.category_name }}</td>
+        <td>{{ match.localteam_name }}</td>
+        <td>{{ match.localteam_goals }}</td>
+        <td>{{ match.visitorteam_name}}</td>
+        <td>{{ match.visitorteam_goals}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <bookmaker [bookmakers]="match | bookmakerPipe"></bookmaker>
+</div>
