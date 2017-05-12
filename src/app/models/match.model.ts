@@ -26,4 +26,5 @@ export interface MatchState {
     matches: Match[],
     date: string,
     loading: boolean,
+    loaded: boolean
 }

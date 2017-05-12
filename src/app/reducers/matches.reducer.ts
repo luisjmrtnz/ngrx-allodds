@@ -6,7 +6,8 @@ import { Match, MatchState, ThreewayOdd} from '../models';
 const initialState: MatchState = {
     matches: [],
     date: null,
-    loading: false
+    loading: false, 
+    loaded: false
 }
 
 export function matchesReducer(state = initialState, action: Action) {
@@ -14,12 +15,16 @@ export function matchesReducer(state = initialState, action: Action) {
         switch(action.type) {
             case MatchesActions.GET_MATCHES: 
                 return Object.assign({}, state, {
-                    loading: true
+                    loading: true,
+                    matches: [], 
+                    loaded: false
                 });
             case MatchesActions.GET_MATCHES_SUCCESS:
+                const newMatches = [].concat(...action.payload);
                 return Object.assign({}, state, {
-                    matches: [].concat(...action.payload),
+                    matches: [...state.matches, ...newMatches],
                     loading: false,
+                    loaded: true
                 });
             case MatchesActions.SET_DATE:
                const date = (action.payload !== '')? action.payload: null;

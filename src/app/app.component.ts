@@ -30,6 +30,7 @@ export class AppComponent implements OnInit{
   date: Observable<string>;
   selectedCategories: Observable<Category[]>;
   toggle: Observable<boolean>;
+  loaded: Observable<boolean>;
 
   constructor(
     private store: Store<AppState>,
@@ -46,6 +47,7 @@ export class AppComponent implements OnInit{
     this.selectedCategories = this.store.select(state => selectedCategories(state.categories));
     this.loadingMatches = this.store.select(state => state.matches.loading);
     this.toggle = this.store.select(state => state.categories.show);
+    this.loaded = this.store.select(state => state.matches.loaded);
 }
 
   onChecked(category: Category) {

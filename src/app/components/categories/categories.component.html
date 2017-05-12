@@ -17,7 +17,8 @@
         </div>
         <ul>
             <li *ngFor="let category of (categories | searchFilter: search.value)">
-                <div class="form-check dropdown-item">
+                <div class="form-check dropdown-item" 
+                    [class.active]="category.selected">
                     <label class="form-check-label">
                         <input 
                             class="form-check-input" 
