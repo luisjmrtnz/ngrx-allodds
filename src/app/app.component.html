@@ -29,15 +29,15 @@
        </div>
     </div>
 </div>
-<div *ngIf="loadingMatches | async">
-    Loading Matches...
-</div>
-<div *ngIf="loaded | async">
-    <div *ngIf="(matches | async)?.length === 0">
-        Sorry, There is no matches right now...
-    </div>
-</div>
 <div class="container-fluid">
+    <div *ngIf="loadingMatches | async">
+        Loading Matches...
+    </div>
+    <div *ngIf="loaded | async">
+        <div *ngIf="(matches | async)?.length === 0">
+            Sorry, There is no matches right now...
+        </div>
+    </div>
     <match-table [matches]="matches | async"></match-table>
 </div>
 

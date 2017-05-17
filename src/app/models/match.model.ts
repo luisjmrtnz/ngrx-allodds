@@ -23,8 +23,9 @@ export interface Odd {
 }
 
 export interface MatchState {
-    matches: Match[],
-    date: string,
-    loading: boolean,
-    loaded: boolean
+    ids: number[];
+    matches: { [match_id: number]: Match };
+    date: string;
+    loading: boolean;
+    loaded: boolean;
 }

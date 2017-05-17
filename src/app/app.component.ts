@@ -5,7 +5,7 @@ import { IMyOptions, MyDatePicker } from 'mydatepicker';
 
 import { CategoriesActions, MatchesActions } from './actions';
 import { Category, CategoryState, MatchState, Match, MatchRequest, ThreewayOdd } from './models';
-import { selectedCategories, getMatches } from './reducers';
+import { selectedCategories, getAllMatches } from './reducers';
 
 export interface AppState {
   categories: CategoryState,
@@ -42,7 +42,7 @@ export class AppComponent implements OnInit{
     this.store.dispatch(this.categoryActions.loadCategories());
     this.categories = this.store.select(state => state.categories.list);
     this.loadingCategories = this.store.select(state => state.categories.loading);
-    this.matches = this.store.select(state => getMatches(state.matches));
+    this.matches = this.store.select(state => getAllMatches(state.matches));
     this.date = this.store.select(state => state.matches.date);
     this.selectedCategories = this.store.select(state => selectedCategories(state.categories));
     this.loadingMatches = this.store.select(state => state.matches.loading);
