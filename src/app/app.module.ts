@@ -30,7 +30,8 @@ import * as pipes from './pipes';
     pipes.SearchFilterPipe,
     pipes.CategorySelectedPipe,
     pipes.ShortTextPipe,
-    pipes.BookmakerPipe
+    pipes.BookmakerPipe,
+    pipes.LocalTimePipe
   ],
   imports: [
     BrowserModule,

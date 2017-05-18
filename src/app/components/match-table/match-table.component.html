@@ -16,8 +16,8 @@
     <tbody>
       <tr>
         <td>{{ match?.match_id }}</td>
-        <td>{{ match.status }}</td>
-        <td>{{ match.date_time }}</td>
+        <td>{{ match.status | localtimePipe: match.date_time: 'time' }}</td>
+        <td>{{ match.status | localtimePipe: match.date_time: 'date' }}</td>
         <td>{{ match.stadium }}</td>
         <td>{{ match.category_name }}</td>
         <td>{{ match.localteam_name }}</td>
