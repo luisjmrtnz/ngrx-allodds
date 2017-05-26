@@ -3,7 +3,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { Category } from '../models';
 
 @Pipe({
-    name: 'searchFilter'
+    name: 'searchFilter',
+    pure: true
 })
 
 export class SearchFilterPipe implements PipeTransform {

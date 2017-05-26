@@ -1,4 +1,4 @@
-<div class="row" *ngFor="let match of matches">
+<div class="row" *ngFor="let match of matches; trackBy: trackById">
   <table class="table table-bordered table-sm">
     <thead>
       <tr class="bg-primary">

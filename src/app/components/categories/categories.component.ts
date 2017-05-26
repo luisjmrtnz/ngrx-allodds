@@ -6,7 +6,8 @@ import {
   EventEmitter,
   ElementRef,
   ViewChild,
-  Renderer
+  Renderer,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 import { Category } from '../../models';
@@ -14,7 +15,8 @@ import { Category } from '../../models';
 @Component({
   selector: 'categories',
   templateUrl: './categories.component.html',
-  styleUrls: ['./categories.component.scss']
+  styleUrls: ['./categories.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CategoriesComponent implements OnInit {
   @Input() loading: boolean;

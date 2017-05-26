@@ -22,16 +22,19 @@ export function matchesReducer(state = initialState, action: Action) {
                     loaded: false
                 });
             case MatchesActions.GET_MATCHES_SUCCESS:
+                /* Concadenate all the arrays of matches */
                 const matches = [].concat(...action.payload);
+                /* Mapping their IDs */
                 const matchesIds = matches.map((match: Match) => match.match_id);
+                /* Check if there are new ids to insert */
                 const newIds = matchesIds.filter((id: number) => state.ids.indexOf(id) <= -1 );
+                /* Creating the big object that has all the matches */ 
                 const newMatches = matches.reduce((matches: { [match_id: number] : Match }, match: Match) => {
                     return Object.assign(matches, {
                         [match.match_id]: match
                     });
                 }, {});
 
-                console.log(newIds);
                 return Object.assign({}, state, {
                     ids: [...state.ids, ...newIds],
                     matches: Object.assign({}, state.matches, newMatches),

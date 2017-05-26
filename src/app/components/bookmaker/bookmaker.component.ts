@@ -1,9 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
     selector: 'bookmaker',
     templateUrl: './bookmaker.component.html',
-    styleUrls: ['bookmaker.component.css']
+    styleUrls: ['bookmaker.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class BookmakerComponent {

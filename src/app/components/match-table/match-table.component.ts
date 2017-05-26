@@ -1,13 +1,18 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 
 import { Match } from '../../models';
 
 @Component({
     selector: 'match-table',
     templateUrl: 'match-table.component.html',
-    styleUrls: ['match-table.component.css']
+    styleUrls: ['match-table.component.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class MatchTableComponent {
     @Input() matches;
+
+    trackById(index, item: Match) {
+        return item.match_id;
+    }
 }
