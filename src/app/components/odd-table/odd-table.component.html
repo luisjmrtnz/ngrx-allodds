@@ -7,7 +7,8 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let odd of odds; trackBy: trackById">
+        <tr *ngFor="let odd of odds; trackBy: trackById"
+            [@bookmakerChanges]="changes">
             <td>{{ odd.odd_name }}</td>
             <td>{{ odd.odd_value }}</td>
             <td> N/A </td>

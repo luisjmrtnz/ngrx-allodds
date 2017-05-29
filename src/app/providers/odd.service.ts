@@ -15,8 +15,8 @@ import 'rxjs/add/operator/retryWhen';
 import { Category, MatchRequest } from '../models/';
 
 
-const API = 'http://46.166.162.185:10500/ws.asmx';
-//const API = 'http://190.10.11.184:10400/soccersodds.asmx';
+//const API = 'http://46.166.162.185:10500/ws.asmx';
+const API = 'http://190.10.11.184:10400/soccersodds.asmx';
 
 @Injectable()
 
