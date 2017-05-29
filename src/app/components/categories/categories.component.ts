@@ -54,4 +54,8 @@ export class CategoriesComponent implements OnInit {
     this.renderer.invokeElementMethod(this.search.nativeElement, 'focus');
   }
 
+  trackById(category: Category){
+    return category.category_id;
+  }
+
 }

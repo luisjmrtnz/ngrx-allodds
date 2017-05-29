@@ -1,6 +1,6 @@
 <div class="container-fluid" *ngIf="bookmakers.length > 0">
     <div class="row scrollable-section">
-        <table *ngFor="let bookmaker of bookmakers"
+        <table *ngFor="let bookmaker of bookmakers; trackBy: trackByName"
             class="table table-bordered table-sm">
             <thead>
                 <tr>
@@ -8,22 +8,7 @@
                 </tr>
             </thead>
             <tbody>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Name</th>
-                            <th>Value</th>
-                            <th>Handicap</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let odd of bookmaker.odds">
-                            <td>{{ odd.odd_name }}</td>
-                            <td>{{ odd.odd_value }}</td>
-                            <td> N/A </td>
-                        </tr>
-                    </tbody>
-                </table>
+                <odd-table [odds]="bookmaker.odds"></odd-table>
             </tbody>
         </table>
     </div>

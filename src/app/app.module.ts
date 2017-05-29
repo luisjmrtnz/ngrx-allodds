@@ -27,6 +27,7 @@ import * as pipes from './pipes';
     components.MatchButtonComponent,
     components.MatchTableComponent,
     components.BookmakerComponent,
+    components.OddTableComponent,
     pipes.SearchFilterPipe,
     pipes.CategorySelectedPipe,
     pipes.ShortTextPipe,

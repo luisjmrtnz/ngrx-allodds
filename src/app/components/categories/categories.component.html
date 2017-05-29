@@ -16,7 +16,7 @@
                 (keyup)="onKeyUp($event)">
         </div>
         <ul>
-            <li *ngFor="let category of (categories | searchFilter: search.value)">
+            <li *ngFor="let category of (categories | searchFilter: search.value); trackBy: trackById">
                 <div class="form-check dropdown-item" 
                     [class.active]="category.selected">
                     <label class="form-check-label">

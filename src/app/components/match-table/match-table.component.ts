@@ -12,7 +12,7 @@ import { Match } from '../../models';
 export class MatchTableComponent {
     @Input() matches;
 
-    trackById(index, item: Match) {
+    trackById(item: Match) {
         return item.match_id;
     }
 }
